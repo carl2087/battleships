@@ -51,7 +51,7 @@ def game_rules():
     type_fast("and they cannot see yours.\n")
     type_fast("Whoever sinks all of the opponents ")
     type_fast("ships first wins the game.\n")
-    time.sleep(4)
+    time.sleep(3)
     os.system("clear")
 
 
@@ -89,6 +89,8 @@ def play_game():
         elif answer == "no":
             type_fast("Hope to see you on the high seas soon")
             print("\n")
+            time.sleep(2)
+            os.system("clear")
             exit_game()
             break
         else:
@@ -107,6 +109,9 @@ def exit_game():
     type_fast(art_two)
     print("\n")
     type_fast(art_three)
+    time.sleep(6)
+    os.system("clear")
+    main()
 
 
 def main():
