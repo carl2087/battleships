@@ -63,6 +63,7 @@ def get_player_name():
     while True:
         type_fast("Please enter your name and hit return button.\n")
         player_name = input("Enter name here: ").capitalize()
+        print("\n")
         if player_name.isalpha():
             type_fast(f"Welcome {player_name} I hope you're ready for battle")
             print("\n")
@@ -81,14 +82,31 @@ def play_game():
     while True:
         print("\n")
         answer = input("Type your answer yes or no?: ").lower()
+        print("\n")
         if answer == "yes":
             type_fast("Welcome to the high seas")
             break
         elif answer == "no":
             type_fast("Hope to see you on the high seas soon")
+            print("\n")
+            exit_game()
             break
         else:
-            type_fast("Error answer must be yes or no")
+            type_fast("Error, answer must be yes or no")
+
+
+def exit_game():
+    """
+    Exit game that shows if a player decides not to play battle ships.
+    """
+    art_one = text2art("Goodbye")
+    art_two = text2art("Hope to see")
+    art_three = text2art("you again")
+    type_fast(art_one)
+    print("\n")
+    type_fast(art_two)
+    print("\n")
+    type_fast(art_three)
 
 
 def main():
@@ -99,5 +117,5 @@ def main():
     game_rules()
     play_game()
 
-play_game()
-# main()
+
+main()
