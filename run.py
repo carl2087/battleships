@@ -34,6 +34,7 @@ def game_load():
     os.system("clear")
     art = text2art("Battle Ships")
     type_fast(art)
+    time.sleep(1)
     os.system("clear")
 
 
@@ -41,7 +42,6 @@ def game_rules():
     """
     Prints the games rules to terminal
     """
-    time.sleep(1.5)
     type_fast("The aim of the game is to sink all of your ")
     type_fast("opponents ships.\n")
     type_fast("You and the computer will each have their own ")
@@ -51,24 +51,44 @@ def game_rules():
     type_fast("and they cannot see yours.\n")
     type_fast("Whoever sinks all of the opponents ")
     type_fast("ships first wins the game.\n")
-    time.sleep(4)23
+    time.sleep(4)
     os.system("clear")
 
 
-def player_name():
+def get_player_name():
     """
     Uses a while loop to get players name that is letters only
     will repeat until correct data entered.
     """
     while True:
-        print("Please enter your name and hit return button.")
-        player_name = input("Enter name here:")
+        type_fast("Please enter your name and hit return button.\n")
+        player_name = input("Enter name here: ").capitalize()
         if player_name.isalpha():
-            print(f"Welcome {player_name} I hope you're ready for battle.")
+            type_fast(f"Welcome {player_name} I hope you're ready for battle")
+            print("\n")
             break
         else:
-            print("Only letters are allowed")
+            type_fast("Only letters are allowed.\n")
     return player_name
+
+
+def play_game():
+    """
+    Asks player if they want to play game will exit game if they say no.
+    """
+    player_name = get_player_name()
+    type_fast(f"So {player_name} are you up for the challenge?")
+    while True:
+        print("\n")
+        answer = input("Type your answer yes or no?: ").lower()
+        if answer == "yes":
+            type_fast("Welcome to the high seas")
+            break
+        elif answer == "no":
+            type_fast("Hope to see you on the high seas soon")
+            break
+        else:
+            type_fast("Error answer must be yes or no")
 
 
 def main():
@@ -77,7 +97,7 @@ def main():
     """
     game_load()
     game_rules()
-    player_name()
+    play_game()
 
-
-main()
+play_game()
+# main()
