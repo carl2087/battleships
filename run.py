@@ -33,7 +33,7 @@ def game_load():
     print(type_slow("Game Loading....\n"))
     os.system("clear")
     art = text2art("Battle Ships")
-    print(type_fast(art))
+    type_fast(art)
     os.system("clear")
 
 
@@ -51,7 +51,33 @@ def game_rules():
     type_fast("and they cannot see yours.\n")
     type_fast("Whoever sinks all of the opponents ")
     type_fast("ships first wins the game.\n")
+    time.sleep(4)23
+    os.system("clear")
 
 
-game_load()
-game_rules()
+def player_name():
+    """
+    Uses a while loop to get players name that is letters only
+    will repeat until correct data entered.
+    """
+    while True:
+        print("Please enter your name and hit return button.")
+        player_name = input("Enter name here:")
+        if player_name.isalpha():
+            print(f"Welcome {player_name} I hope you're ready for battle.")
+            break
+        else:
+            print("Only letters are allowed")
+    return player_name
+
+
+def main():
+    """
+    Runs all program functions.
+    """
+    game_load()
+    game_rules()
+    player_name()
+
+
+main()
