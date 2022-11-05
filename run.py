@@ -8,6 +8,17 @@ import time
 from art import text2art
 
 
+class Colours:
+    """
+    Class of colours for different segments of text in game
+    """
+    red = '\033[91m'
+    blue = '\033[94m'
+    yellow = '\033[93m'
+    purple = '\033[95m'
+    white = '\033[0m'
+
+
 def type_slow(word):
     """
     Types letters slowly in terminal
@@ -33,7 +44,7 @@ def game_load():
     print(type_slow("Game Loading....\n"))
     os.system("clear")
     art = text2art("Battle Ships")
-    type_fast(art)
+    type_fast(Colours.purple + art + Colours.white)
     time.sleep(1)
     os.system("clear")
 
