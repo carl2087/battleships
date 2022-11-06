@@ -21,8 +21,8 @@ class Colours:
 
 
 # The battleship fields of play boards
-COMPUTER_BOARD = [[""] * 8 for i in range (8)]
-PLAYER_BOARD = [[""] * 8 for i in range (8)]
+COMPUTER_BOARD = [[" "] * 8 for i in range(8)]
+PLAYER_BOARD = [[" "] * 8 for i in range(8)]
 
 # Changes letters into integers for the battleship board
 letters_to_integers = {
@@ -144,6 +144,18 @@ def exit_game():
     main()
 
 
+def battle_boards(board):
+    """
+    Prints the battle board areas to the terminal.
+    """
+    print("A B C D E F G H")
+    print("---------------")
+    row_num = 1
+    for row in board:
+        print("%d|%s|" % (row_num, "|".join(row)))
+        row_num += 1
+
+
 def main():
     """
     Runs all program functions.
@@ -153,4 +165,5 @@ def main():
     play_game()
 
 
+battle_boards(PLAYER_BOARD)
 # main()
