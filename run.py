@@ -199,6 +199,25 @@ def ship_overlap(board, row, column, ship_place, ship):
     return False
 
 
+def ship_board(LENGTH_OF_SHIP, row, column, ship_place):
+    """
+    Function checks if ships are placed within the board
+    if they are placed off the board then an error message is
+    printed to player.
+    """
+    if ship_place == "h":
+        if column + LENGTH_OF_SHIP > 8:
+            return False
+        else:
+            return True
+    else:
+        if ship_place == "v":
+            if row + LENGTH_OF_SHIP > 8:
+                return False
+        else:
+            return True
+
+
 def main():
     """
     Runs all program functions.
