@@ -20,7 +20,11 @@ class Colours:
     white = '\033[0m'
 
 
-# Changes letters into intergers for the battleship board
+# The battleship fields of play boards
+COMPUTER_BOARD = [[""] * 8 for i in range (8)]
+PLAYER_BOARD = [[""] * 8 for i in range (8)]
+
+# Changes letters into integers for the battleship board
 letters_to_integers = {
     'A': 0,
     'B': 1,
