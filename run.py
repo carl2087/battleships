@@ -20,6 +20,10 @@ class Colours:
     white = '\033[0m'
 
 
+# The length of each ship in the game
+LENGTH_OF_SHIP = [2, 3, 3, 4, 5]
+
+
 # The battleship fields of play boards
 COMPUTER_BOARD = [[" "] * 8 for i in range(8)]
 PLAYER_BOARD = [[" "] * 8 for i in range(8)]
@@ -147,9 +151,10 @@ def exit_game():
 def battle_boards(board):
     """
     Prints the battle board areas to the terminal.
+    Placeholder present to enable manipulation in game.
     """
-    print("A B C D E F G H")
-    print("---------------")
+    print("  A B C D E F G H")
+    print("__________________")
     row_num = 1
     for row in board:
         print("%d|%s|" % (row_num, "|".join(row)))
