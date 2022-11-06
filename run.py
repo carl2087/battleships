@@ -5,6 +5,7 @@ Battleships game that runs in a custom terminal
 # Libraries imported into the game
 import os
 import time
+from random import randint
 from art import text2art
 
 
@@ -17,6 +18,19 @@ class Colours:
     yellow = '\033[93m'
     purple = '\033[95m'
     white = '\033[0m'
+
+
+# Changes letters into intergers for the battleship board
+letters_to_integers = {
+    'A': 0,
+    'B': 1,
+    'C': 2,
+    'D': 3,
+    'E': 4,
+    'F': 5,
+    'G': 6,
+    'H': 7
+}
 
 
 def type_slow(word):
@@ -96,6 +110,7 @@ def play_game():
         print("\n")
         if answer == "yes":
             type_fast("Welcome to the high seas")
+            print("\n")
             break
         elif answer == "no":
             type_fast("Hope to see you on the high seas soon")
@@ -115,11 +130,11 @@ def exit_game():
     art_one = text2art("Goodbye")
     art_two = text2art("Hope to see")
     art_three = text2art("you again")
-    type_fast(art_one)
+    type_fast(Colours.purple + art_one)
     print("\n")
     type_fast(art_two)
     print("\n")
-    type_fast(art_three)
+    type_fast(art_three + Colours.white)
     time.sleep(6)
     os.system("clear")
     main()
@@ -134,4 +149,4 @@ def main():
     play_game()
 
 
-main()
+# main()
