@@ -5,7 +5,7 @@ Battleships game that runs in a custom terminal
 # Libraries imported into the game
 import os
 import time
-from random import randint
+import random
 from art import text2art
 
 
@@ -160,6 +160,27 @@ def battle_boards(board):
         print("%d|%s|" % (row_num, "|".join(row)))
         row_num += 1
 
+
+def place_ship(board):
+    """
+    Allows the user and the computer to place ships on the board.
+    This function will loop through the ship lengths and will also check for
+    ship overlap on board.
+    """
+    for ship in LENGTH_OF_SHIP:
+        while True:
+            if board == COMPUTER_BOARD:
+                ship_place, column, row = random.choice(["h", "v"]),
+                random.randint(0, 7), random.randint(0, 7)
+                if ship_overlap(board, row, column, ship_place, ship_length):
+                    if not ship_board(ship_length, row, column, ship_place):
+                        if ship_place == "h":
+                            for i in range(column, column + ship_length):
+                                board[row][i] = "@"
+                        elif ship_place == "v":
+                            for i in range(row, row + ship_length):
+                                board[row][i] = "@"
+                        break
 
 def main():
     """
