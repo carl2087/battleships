@@ -172,15 +172,32 @@ def place_ship(board):
             if board == COMPUTER_BOARD:
                 ship_place, column, row = random.choice(["h", "v"]),
                 random.randint(0, 7), random.randint(0, 7)
-                if ship_overlap(board, row, column, ship_place, ship_length):
-                    if not ship_board(ship_length, row, column, ship_place):
+                if ship_overlap(board, row, column, ship_place, ship):
+                    if not ship_board(ship, row, column, ship_place):
                         if ship_place == "h":
-                            for i in range(column, column + ship_length):
+                            for i in range(column, column + ship):
                                 board[row][i] = "@"
                         elif ship_place == "v":
-                            for i in range(row, row + ship_length):
+                            for i in range(row, row + ship):
                                 board[row][i] = "@"
                         break
+
+
+def ship_overlap(board, row, column, ship_place, ship):
+    """
+    Checks if ships overlap when computer or players
+    places them on board.
+    """
+    if ship_place == "h":
+        for i in range(column, column + ship):
+            if board[row][i] == "@":
+                return True
+    else:
+        for i in range(row, row + ship):
+            if board[column][i] == "@":
+                return True
+    return False
+
 
 def main():
     """
