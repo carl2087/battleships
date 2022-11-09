@@ -170,17 +170,36 @@ def place_ship(board):
     for ship in LENGTH_OF_SHIP:
         while True:
             if board == COMPUTER_BOARD:
-                ship_place, column, row = random.choice(["h", "v"]),
-                random.randint(0, 7), random.randint(0, 7)
+                ship_place, column, row = random.choice(["h", "v"]), \
+                    random.randint(0, 7), random.randint(0, 7)
                 if ship_overlap(board, row, column, ship_place, ship):
                     if not ship_board(ship, row, column, ship_place):
-                        if ship_place == "h":
+                        if ship_place == "v":
                             for i in range(column, column + ship):
-                                board[row][i] = "@"
-                        elif ship_place == "v":
+                                board[column][i] = "@"
+                        elif ship_place == "h":
                             for i in range(row, row + ship):
                                 board[row][i] = "@"
                         break
+            else:
+                type_fast("Please place your ship it's length is" + str(ship))
+                ship_place, column, row = player_choice(place_ship)
+                if ship_board(ship, row, column, ship_place):
+                    if ship_overlap(board, row, column, ship_place, ship):
+                        type_fast("You cannot place your ship here please")
+                        type_fast(" choose again")
+                    else:
+                        if ship_place == "v":
+                            for i in range(column, column + ship):
+                                board[column][i] = "@"
+                        elif ship_place == "h":
+                            for i in range(row, row + ship):
+                                board[row][i] = "@"
+                        break
+                    battle_boards(PLAYER_BOARD)
+
+
+# def player_choice(place_ship):
 
 
 def ship_overlap(board, row, column, ship_place, ship):
