@@ -225,16 +225,29 @@ def ship_board(LENGTH_OF_SHIP, row, column, ship_place):
     printed to player.
     """
     if ship_place == "h":
-        if column + LENGTH_OF_SHIP > 8:
+        if row + LENGTH_OF_SHIP > 8:
             return False
         else:
             return True
     else:
         if ship_place == "v":
-            if row + LENGTH_OF_SHIP > 8:
+            if column + LENGTH_OF_SHIP > 8:
                 return False
         else:
             return True
+
+
+def score_count(board):
+    """
+    Counts the number of succesful hits on the ships, keeps
+    track of the score to end game when all ships sunk.
+    """
+    hit_count = 0
+    for row in board:
+        for column in row:
+            if column == "X":
+                hit_count += 1
+    return hit_count
 
 
 def main():
