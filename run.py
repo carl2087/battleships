@@ -183,7 +183,7 @@ def place_ship(board):
                         break
             else:
                 type_fast("Please place your ship it's length is" + str(ship))
-                ship_place, column, row = player_choice(place_ship)
+                ship_place, column, row = player_choice()
                 if ship_board(ship, row, column, ship_place):
                     if ship_overlap(board, row, column, ship_place, ship):
                         type_fast("You cannot place your ship here please")
@@ -199,7 +199,40 @@ def place_ship(board):
                     battle_boards(PLAYER_BOARD)
 
 
-# def player_choice(place_ship):
+def player_choice():
+    """
+    Allows the user to place ships on the board.
+    """
+    while True:
+        try:
+            ship_place = input("Horizontal (H) or Vertical (V)? ").lower()
+            if ship_place == "h" or ship_place == "v":
+                break
+            else:
+                raise ValueError(f"wrong input({ship_place})")
+        except ValueError as error:
+            print(f"You entered {error}, please enter H or V")
+    while True:
+        try:
+            column = input("Which column from A to H? ").upper()
+            if column in "ABCDEFGH":
+                column = letters_to_integers[column]
+                break
+            else:
+                raise ValueError(f"wrong input({column})")
+        except ValueError as error:
+            print(f"You entered {error}, please enter A, B, C, D, E, F, G, H")
+    while True:
+        try:
+            row = input("Which row from 1 to 8? ")
+            if row in "12345678":
+                row = int(row) - 1
+                break
+            else:
+                raise ValueError(f"wrong input ({row})")
+        except ValueError as error:
+            print(f"You entered {error}, please enter 1, 2, 3, 4, 5, 6, 7, 8")
+    return ship_place, column, row
 
 
 def ship_overlap(board, row, column, ship_place, ship):
@@ -259,5 +292,6 @@ def main():
     play_game()
 
 
-battle_boards(PLAYER_BOARD)
+# battle_boards(PLAYER_BOARD)
 # main()
+player_choice()
