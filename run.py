@@ -21,12 +21,12 @@ class Colours:
 
 
 # The length of each ship in the game
-LENGTH_OF_SHIP = [2, 3, 3, 4, 5]
+LENGTH_OF_SHIP = [2, 3, 3, 4, 4]
 
 
 # The battleship fields of play boards
-COMPUTER_BOARD = [[" "] * 8 for i in range(8)]
-PLAYER_BOARD = [[" "] * 8 for i in range(8)]
+COMPUTER_BOARD = [[" "] * 7 for i in range(7)]
+PLAYER_BOARD = [[" "] * 7 for i in range(7)]
 
 # Changes letters into integers for the battleship board
 letters_to_integers = {
@@ -37,7 +37,6 @@ letters_to_integers = {
     'E': 4,
     'F': 5,
     'G': 6,
-    'H': 7
 }
 
 
@@ -153,7 +152,7 @@ def battle_boards(board):
     Prints the battle board areas to the terminal.
     Placeholder present to enable manipulation in game.
     """
-    print("  A B C D E F G H")
+    print("  A B C D E F G")
     print("__________________")
     row_num = 1
     for row in board:
@@ -170,69 +169,75 @@ def place_ship(board):
     for ship in LENGTH_OF_SHIP:
         while True:
             if board == COMPUTER_BOARD:
-                ship_place, column, row = random.choice(["h", "v"]), \
-                    random.randint(0, 7), random.randint(0, 7)
-                if ship_overlap(board, row, column, ship_place, ship):
-                    if not ship_board(ship, row, column, ship_place):
-                        if ship_place == "v":
+                ship_place, row, column = random.choice(["h", "v"]), \
+                    random.randint(0, 6), random.randint(0, 6)
+                if ship_board(ship, row, column, ship_place):
+                    if not ship_overlap(board, row, column, ship_place, ship):
+                        if ship_place == "h":
                             for i in range(column, column + ship):
-                                board[column][i] = "@"
-                        elif ship_place == "h":
-                            for i in range(row, row + ship):
                                 board[row][i] = "@"
+                        elif ship_place == "v":
+                            for i in range(row, row + ship):
+                                board[i][column] = "@"
                         break
             else:
-                type_fast("Please place your ship it's length is" + str(ship))
-                ship_place, column, row = player_choice()
+                type_fast("Time to place your ship")
+                type_fast(" with a length of " + str(ship))
+                print("\n")
+                row, column, ship_place = player_choice(ship)
                 if ship_board(ship, row, column, ship_place):
                     if ship_overlap(board, row, column, ship_place, ship):
-                        type_fast("You cannot place your ship here please")
-                        type_fast(" choose again")
+                        type_fast("Can't place ship here please choose again.")
                     else:
-                        if ship_place == "v":
+                        if ship_place == "h":
                             for i in range(column, column + ship):
-                                board[column][i] = "@"
-                        elif ship_place == "h":
-                            for i in range(row, row + ship):
                                 board[row][i] = "@"
+                        elif ship_place == "v":
+                            for i in range(row, row + ship):
+                                board[i][column] = "@"
+                        else:
+                            break
+                        battle_boards(PLAYER_BOARD)
                         break
-                    battle_boards(PLAYER_BOARD)
 
 
-def player_choice():
+def player_choice(ship):
     """
     Allows the user to place ships on the board.
     """
-    while True:
-        try:
-            ship_place = input("Horizontal (H) or Vertical (V)? ").lower()
-            if ship_place == "h" or ship_place == "v":
-                break
-            else:
-                raise ValueError(f"wrong input({ship_place})")
-        except ValueError as error:
-            print(f"You entered {error}, please enter H or V")
-    while True:
-        try:
-            column = input("Which column from A to H? ").upper()
-            if column in "ABCDEFGH":
-                column = letters_to_integers[column]
-                break
-            else:
-                raise ValueError(f"wrong input({column})")
-        except ValueError as error:
-            print(f"You entered {error}, please enter A, B, C, D, E, F, G, H")
-    while True:
-        try:
-            row = input("Which row from 1 to 8? ")
-            if row in "12345678":
-                row = int(row) - 1
-                break
-            else:
-                raise ValueError(f"wrong input ({row})")
-        except ValueError as error:
-            print(f"You entered {error}, please enter 1, 2, 3, 4, 5, 6, 7, 8")
-    return ship_place, column, row
+    if ship:
+        while True:
+            try:
+                ship_place = input("Horizontal (H) or Vertical (V)? ").lower()
+                if ship_place == "h" or ship_place == "v":
+                    break
+                else:
+                    raise ValueError(f"wrong input({ship_place})")
+            except ValueError as error:
+                print(f"You entered {error}, please enter H or V")
+                print("\n")
+        while True:
+            try:
+                row = input("Which row 1 to 7?\n")
+                if row in "1324567":
+                    row = int(row) - 1
+                    break
+                else:
+                    raise ValueError(f"wrong input({row})")
+            except ValueError as error:
+                print(f"You entered {error}, please enter 1 to 8")
+                print("\n")
+        while True:
+            try:
+                column = input("Which column from A to G?\n").upper()
+                if column not in "ABCDEFG":
+                    print("Please enter A to G")
+                else:
+                    column = letters_to_integers[column]
+                    break
+            except KeyError:
+                print("Please enter A to G")
+        return row, column, ship_place
 
 
 def ship_overlap(board, row, column, ship_place, ship):
@@ -251,21 +256,20 @@ def ship_overlap(board, row, column, ship_place, ship):
     return False
 
 
-def ship_board(LENGTH_OF_SHIP, row, column, ship_place):
+def ship_board(ship, row, column, ship_place):
     """
     Function checks if ships are placed within the board
     if they are placed off the board then an error message is
     printed to player.
     """
     if ship_place == "h":
-        if row + LENGTH_OF_SHIP > 8:
+        if column + ship > 7:
             return False
         else:
             return True
     else:
-        if ship_place == "v":
-            if column + LENGTH_OF_SHIP > 8:
-                return False
+        if row + ship > 7:
+            return False
         else:
             return True
 
@@ -294,4 +298,6 @@ def main():
 
 # battle_boards(PLAYER_BOARD)
 # main()
-player_choice()
+
+battle_boards(PLAYER_BOARD)
+place_ship(PLAYER_BOARD)
