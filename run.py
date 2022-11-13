@@ -206,8 +206,7 @@ def place_ship(board):
 
 def player_choice(place_your_ship):
     """
-    Allows the user to place ships on the board and will
-    also allow user to target enemy ships
+    Allows the user to place ships on the board.
     """
     if place_your_ship:
         while True:
@@ -241,27 +240,34 @@ def player_choice(place_your_ship):
                 print("Please only enter A to H\n")
         return row, column, ship_place
     else:
-        while True:
-            try:
-                row = input("Which row 1 to 8?\n")
-                if row in "12345678":
-                    row = int(row) - 1
-                    break
-                else:
-                    raise ValueError
-            except ValueError:
-                print("Please only enter 1 to 8.\n")
-        while True:
-            try:
-                column = input("Which column A to H?\n").upper()
-                if column not in "ABCDEFGH":
-                    print("Please only enter A to H\n")
-                else:
-                    column = letters_to_integers[column]
-                    break
-            except KeyError:
+        player_choice(place_your_ship)
+
+
+def aim_at_ship():
+    """
+    Allows the player to aim at enemy ships on the board
+    """
+    while True:
+        try:
+            row = input("Which row 1 to 8?\n")
+            if row in "12345678":
+                row = int(row) - 1
+                break
+            else:
+                raise ValueError
+        except ValueError:
+            print("Please only enter 1 to 8.\n")
+    while True:
+        try:
+            column = input("Which column A to H?\n").upper()
+            if column not in "ABCDEFGH":
                 print("Please only enter A to H\n")
-        return row, column
+            else:
+                column = letters_to_integers[column]
+                break
+        except KeyError:
+            print("Please only enter A to H\n")
+    return row, column
 
 
 def ship_overlap(board, row, column, ship_place, ship):
@@ -303,7 +309,7 @@ def player_turn(board):
     This function cycles between player and computer turns to play the game
     """
     if board == PLAYER_GUESS_BOARD:
-        row, column = player_choice(PLAYER_GUESS_BOARD)
+        row, column = aim_at_ship()
         if board[row][column] == "O":
             player_turn(board)
         elif board[row][column] == "X":
@@ -312,7 +318,7 @@ def player_turn(board):
             type_fast("You hit them!!")
             print("\n")
         else:
-            board, row, column = "O"
+            board[row][column] = "O"
             type_fast("We missed them better luck next time!")
             print("\n")
     else:
@@ -343,13 +349,12 @@ def start_the_game():
             type_fast("Time to start picking your shot locations!!")
             print("\n")
             battle_boards(PLAYER_GUESS_BOARD)
-            print("code ran to here")
             player_turn(PLAYER_GUESS_BOARD)
             time.sleep(1.5)
             break
         if score_count(PLAYER_GUESS_BOARD) == 16:
             art = text2art("YOU HAVE WON!")
-            type_slow(Colours.purple + art + Colours.white)
+            type_fast(Colours.purple + art + Colours.white)
             break
         while True:
             player_turn(COMPUTER_GUESS_BOARD)
@@ -358,7 +363,7 @@ def start_the_game():
         battle_boards(COMPUTER_GUESS_BOARD)
         if score_count(COMPUTER_GUESS_BOARD) == 16:
             art = text2art("YOU LOST :(")
-            type_slow(Colours.red + art + Colours.white)
+            type_fast(Colours.red + art + Colours.white)
             break
 
 
@@ -385,4 +390,4 @@ def main():
 
 
 #main()
-start_the_game()
+#start_the_game()
