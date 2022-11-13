@@ -98,7 +98,7 @@ def get_player_name():
     """
     while True:
         type_fast("Please enter your name and hit return button.\n")
-        player_name = input("Enter name here: ").capitalize()
+        player_name = input("Enter name here: \n").capitalize()
         print("\n")
         if player_name.isalpha():
             type_fast(f"Welcome {player_name} I hope you're ready for battle")
@@ -117,7 +117,7 @@ def play_game():
     type_fast(f"So {player_name} are you up for the challenge?")
     while True:
         print("\n")
-        answer = input("Type your answer yes or no?: ").lower()
+        answer = input("Type your answer yes or no?: \n").lower()
         print("\n")
         if answer == "yes":
             type_fast("Welcome to the high seas")
@@ -212,7 +212,7 @@ def player_choice(place_your_ship):
     if place_your_ship:
         while True:
             try:
-                ship_place = input("Horizontal (H) or Vertical (V)? ").lower()
+                ship_place = input("Horizontal (H) or Vertical (V)? \n").lower()
                 if ship_place == "h" or ship_place == "v":
                     break
                 else:
@@ -250,7 +250,7 @@ def aim_at_ship():
     """
     while True:
         try:
-            row = input("Which row 1 to 8? ")
+            row = input("Which row 1 to 8? \n")
             if row in "12345678":
                 row = int(row) - 1
                 break
@@ -260,7 +260,7 @@ def aim_at_ship():
             print("Please only enter 1 to 8.\n")
     while True:
         try:
-            column = input("Which column A to H? ").upper()
+            column = input("Which column A to H? \n").upper()
             if column not in "ABCDEFGH":
                 print("Please only enter A to H\n")
             else:
@@ -395,7 +395,7 @@ def play_game_again():
     loading screens.
     """
     while True:
-        answer = input("would you like to play again? ").lower()
+        answer = input("would you like to play again? \n").lower()
         if answer == "yes":
             start_the_game()
         elif answer == "no":
