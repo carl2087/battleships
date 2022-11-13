@@ -189,17 +189,14 @@ def place_ship(board):
                 row, column, ship_place = player_choice(place_your_ship)
                 if ship_board(ship, row, column, ship_place):
                     if ship_overlap(board, row, column, ship_place, ship):
-                        type_fast("You cannot place your ship here!.")
-                        print("\n")
+                        print("You cannot place your ship here!.")
                     else:
                         if ship_place == "h":
                             for i in range(column, column + ship):
                                 board[row][i] = "@"
-                        elif ship_place == "v":
+                        else:
                             for i in range(row, row + ship):
                                 board[i][column] = "@"
-                        else:
-                            break
                         battle_boards(PLAYER_BOARD)
                         break
 
