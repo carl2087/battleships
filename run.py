@@ -180,7 +180,7 @@ def place_ship(board):
                         if ship_place == "h":
                             for i in range(column, column + ship):
                                 board[row][i] = "@"
-                        elif ship_place == "v":
+                        else:
                             for i in range(row, row + ship):
                                 board[i][column] = "@"
                         break
@@ -314,7 +314,8 @@ def player_turn(board):
             player_turn(board)
         elif board[row][column] == "X":
             player_turn(board)
-        elif COMPUTER_BOARD[row][column] == "X":
+        elif COMPUTER_BOARD[row][column] == "@":
+            board[row][column] = "X"
             type_fast("You hit them!!")
             print("\n")
         else:
@@ -343,10 +344,11 @@ def start_the_game():
     """
     place_ship(COMPUTER_BOARD)
     battle_boards(PLAYER_BOARD)
+    battle_boards(COMPUTER_BOARD)
     place_ship(PLAYER_BOARD)
     while True:
         while True:
-            type_fast("Time to start picking your shot locations!!")
+            type_fast("Time to pick your shot!!")
             print("\n")
             battle_boards(PLAYER_GUESS_BOARD)
             player_turn(PLAYER_GUESS_BOARD)
@@ -389,5 +391,4 @@ def main():
     play_game()
 
 
-#main()
-#start_the_game()
+main()
