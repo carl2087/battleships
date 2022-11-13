@@ -27,6 +27,8 @@ LENGTH_OF_SHIP = [2, 3, 3, 4, 4]
 # The battleship fields of play boards
 COMPUTER_BOARD = [[" "] * 8 for i in range(8)]
 PLAYER_BOARD = [[" "] * 8 for i in range(8)]
+PLAYER_GUESS_BOARD = [[" "] * 8 for i in range(8)]
+COMPUTER_GUESS_BOARD = [[" "] * 8 for i in range(8)]
 
 # Changes letters into integers for the battleship board
 letters_to_integers = {
@@ -272,7 +274,7 @@ def ship_overlap(board, row, column, ship_place, ship):
                 return True
     else:
         for i in range(row, row + ship):
-            if board[column][i] == "@":
+            if board[i][column] == "@":
                 return True
     return False
 
@@ -293,6 +295,38 @@ def ship_board(ship, row, column, ship_place):
             return False
         else:
             return True
+
+
+def player_turn(board):
+    """
+    This function cycles between player and computer turns to play the game
+    """
+    if board == PLAYER_GUESS_BOARD:
+        row, column = player_choice(PLAYER_GUESS_BOARD)
+        if board[row][column] == "O":
+            player_turn(board)
+        elif board[row][column] == "X":
+            player_turn(board)
+        elif COMPUTER_BOARD[row][column] == "X":
+            type_fast("You hit them!!")
+            print("\n")
+        else:
+            board, row, column = "O"
+            type_fast("We missed them better luck next time!")
+            print("\n")
+    else:
+        row, column = random.randint(0, 7), random.randint(0, 7)
+        if board[row][column] == "O":
+            player_turn(board)
+        elif board[row][column] == "X":
+            player_turn(board)
+        elif PLAYER_BOARD[row][column] == "@":
+            board[row][column] = "X"
+            type_fast("We have been hit!!!")
+            print("\n")
+        else:
+            board[row][column] = "O"
+            type_fast("The computer MISSED!!!")
 
 
 def score_count(board):
