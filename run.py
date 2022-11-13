@@ -212,7 +212,7 @@ def player_choice(place_your_ship):
     if place_your_ship:
         while True:
             try:
-                ship_place = input("Horizontal (H) or Vertical (V)? \n").lower()
+                ship_place = input("Horizontal (H) or Vertical (V)?\n").lower()
                 if ship_place == "h" or ship_place == "v":
                     break
                 else:
