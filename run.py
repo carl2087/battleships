@@ -18,6 +18,7 @@ class Colours:
     yellow = '\033[93m'
     purple = '\033[95m'
     white = '\033[0m'
+    green = "\033[0;32m"
 
 
 # The length of each ship in the game
@@ -211,13 +212,13 @@ def player_choice(place_your_ship):
     if place_your_ship:
         while True:
             try:
-                ship_place = input("Horizontal (H) or Vertical (V)?").lower()
+                ship_place = input("Horizontal (H) or Vertical (V)? ").lower()
                 if ship_place == "h" or ship_place == "v":
                     break
                 else:
                     raise ValueError
             except ValueError:
-                print("Please only enter H or V.\n")
+                print("Please only enter H or V. ")
         while True:
             try:
                 row = input("Which row 1 to 8?\n")
@@ -249,7 +250,7 @@ def aim_at_ship():
     """
     while True:
         try:
-            row = input("Which row 1 to 8?\n")
+            row = input("Which row 1 to 8? ")
             if row in "12345678":
                 row = int(row) - 1
                 break
@@ -259,7 +260,7 @@ def aim_at_ship():
             print("Please only enter 1 to 8.\n")
     while True:
         try:
-            column = input("Which column A to H?\n").upper()
+            column = input("Which column A to H? ").upper()
             if column not in "ABCDEFGH":
                 print("Please only enter A to H\n")
             else:
@@ -311,16 +312,21 @@ def player_turn(board):
     if board == PLAYER_GUESS_BOARD:
         row, column = aim_at_ship()
         if board[row][column] == "O":
+            type_fast("You've already aimed there!!")
+            print("\n")
             player_turn(board)
         elif board[row][column] == "X":
+            type_fast("You've already aimed there!!")
+            print("\n")
             player_turn(board)
         elif COMPUTER_BOARD[row][column] == "@":
             board[row][column] = "X"
-            type_fast("You hit them!!")
+            type_fast(Colours.green + "You hit them!!" + Colours.white)
             print("\n")
         else:
             board[row][column] = "O"
-            type_fast("We missed them better luck next time!")
+            type_fast(Colours.red + "We missed them better luck next time!"
+                      + Colours.white)
             print("\n")
     else:
         row, column = random.randint(0, 7), random.randint(0, 7)
@@ -330,11 +336,11 @@ def player_turn(board):
             player_turn(board)
         elif PLAYER_BOARD[row][column] == "@":
             board[row][column] = "X"
-            type_fast("We have been hit!!!")
+            type_fast(Colours.red + "We have been hit!!!" + Colours.white)
             print("\n")
         else:
             board[row][column] = "O"
-            type_fast("The computer MISSED!!!")
+            type_fast(Colours.green + "The computer MISSED!!!" + Colours.white)
 
 
 def start_the_game():
@@ -344,7 +350,6 @@ def start_the_game():
     """
     place_ship(COMPUTER_BOARD)
     battle_boards(PLAYER_BOARD)
-    battle_boards(COMPUTER_BOARD)
     place_ship(PLAYER_BOARD)
     while True:
         while True:
@@ -357,6 +362,7 @@ def start_the_game():
         if score_count(PLAYER_GUESS_BOARD) == 16:
             art = text2art("YOU HAVE WON!")
             type_fast(Colours.purple + art + Colours.white)
+            play_game_again()
             break
         while True:
             player_turn(COMPUTER_GUESS_BOARD)
@@ -366,6 +372,7 @@ def start_the_game():
         if score_count(COMPUTER_GUESS_BOARD) == 16:
             art = text2art("YOU LOST :(")
             type_fast(Colours.red + art + Colours.white)
+            play_game_again()
             break
 
 
@@ -380,6 +387,25 @@ def score_count(board):
             if column == "X":
                 hit_count += 1
     return hit_count
+
+
+def play_game_again():
+    """
+    Asks if player wants to play again enables game to restart without first
+    loading screens.
+    """
+    while True:
+        answer = input("would you like to play again? ").lower()
+        if answer == "yes":
+            start_the_game()
+        elif answer == "no":
+            art = text2art("Goodbye")
+            type_fast(Colours.yellow + art + Colours.white)
+            time.sleep(2)
+            main()
+        else:
+            type_fast("You must enter yes or no.")
+            print("\n")
 
 
 def main():
