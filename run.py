@@ -325,7 +325,7 @@ def player_turn(board):
             print("\n")
         else:
             board[row][column] = "O"
-            type_fast(Colours.red + "We missed them better luck next time!"
+            type_fast(Colours.red + "You missed them better luck next time!"
                       + Colours.white)
             print("\n")
     else:
