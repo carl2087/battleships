@@ -25,8 +25,8 @@ LENGTH_OF_SHIP = [2, 3, 3, 4, 4]
 
 
 # The battleship fields of play boards
-COMPUTER_BOARD = [[" "] * 8 for i in range(8)]
 PLAYER_BOARD = [[" "] * 8 for i in range(8)]
+COMPUTER_BOARD = [[" "] * 8 for i in range(8)]
 PLAYER_GUESS_BOARD = [[" "] * 8 for i in range(8)]
 COMPUTER_GUESS_BOARD = [[" "] * 8 for i in range(8)]
 
@@ -121,6 +121,7 @@ def play_game():
         if answer == "yes":
             type_fast("Welcome to the high seas")
             print("\n")
+            start_the_game()
             break
         elif answer == "no":
             type_fast("Hope to see you on the high seas soon")
@@ -329,6 +330,38 @@ def player_turn(board):
             type_fast("The computer MISSED!!!")
 
 
+def start_the_game():
+    """
+    This function holds the code that starts the game after
+    the introductory screens.
+    """
+    place_ship(COMPUTER_BOARD)
+    battle_boards(PLAYER_BOARD)
+    place_ship(PLAYER_BOARD)
+    while True:
+        while True:
+            type_fast("Time to start picking your shot locations!!")
+            print("\n")
+            battle_boards(PLAYER_GUESS_BOARD)
+            print("code ran to here")
+            player_turn(PLAYER_GUESS_BOARD)
+            time.sleep(1.5)
+            break
+        if score_count(PLAYER_GUESS_BOARD) == 16:
+            art = text2art("YOU HAVE WON!")
+            type_slow(Colours.purple + art + Colours.white)
+            break
+        while True:
+            player_turn(COMPUTER_GUESS_BOARD)
+            time.sleep(1.5)
+            break
+        battle_boards(COMPUTER_GUESS_BOARD)
+        if score_count(COMPUTER_GUESS_BOARD) == 16:
+            art = text2art("YOU LOST :(")
+            type_slow(Colours.red + art + Colours.white)
+            break
+
+
 def score_count(board):
     """
     Counts the number of succesful hits on the ships, keeps
@@ -344,16 +377,12 @@ def score_count(board):
 
 def main():
     """
-    Runs all program functions.
+    Runs program functions to start the battleship game.
     """
     game_load()
     game_rules()
     play_game()
 
 
-# battle_boards(PLAYER_BOARD)
-# main()
-
-# battle_boards(COMPUTER_BOARD)
-place_ship(PLAYER_BOARD)
-# battle_boards(COMPUTER_BOARD)
+#main()
+start_the_game()
