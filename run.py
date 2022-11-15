@@ -336,11 +336,12 @@ def player_turn(board):
             player_turn(board)
         elif PLAYER_BOARD[row][column] == "@":
             board[row][column] = "X"
-            type_fast(Colours.red + "We have been hit!!!" + Colours.white)
+            type_fast(Colours.red + "You have been hit!!!" + Colours.white)
             print("\n")
         else:
             board[row][column] = "O"
             type_fast(Colours.green + "The computer MISSED!!!" + Colours.white)
+            print("\n")
 
 
 def start_the_game():
@@ -360,7 +361,7 @@ def start_the_game():
             time.sleep(1.5)
             break
         if score_count(PLAYER_GUESS_BOARD) == 16:
-            art = text2art("YOU HAVE WON!")
+            art = text2art("YOU'VE WON!")
             type_fast(Colours.purple + art + Colours.white)
             play_game_again()
             break
@@ -395,7 +396,7 @@ def play_game_again():
     loading screens.
     """
     while True:
-        answer = input("would you like to play again? \n").lower()
+        answer = input("Would you like to play again? \n").lower()
         if answer == "yes":
             start_the_game()
         elif answer == "no":
