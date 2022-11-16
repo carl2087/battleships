@@ -107,6 +107,7 @@ I tested my code throughout this project by:
 ## Validator testing
 
 * PEP8 within the gitpod terminal shows no errors remaining.
+* CI Python linter shows no errors as well.
 
 ## Deployment
 
