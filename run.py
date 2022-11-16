@@ -66,7 +66,8 @@ def game_load():
     """
     Shows in terminal when first accessing battleships game.
     """
-    print(type_slow("Game Loading....\n"))
+    type_slow("Game Loading....")
+    print("\n")
     os.system("clear")
     art = text2art("Battle Ships")
     type_fast(Colours.purple + art + Colours.white)
@@ -403,6 +404,7 @@ def play_game_again():
             art = text2art("Goodbye")
             type_fast(Colours.yellow + art + Colours.white)
             time.sleep(2)
+            os.system("clear")
             main()
         else:
             type_fast("You must enter yes or no.")
