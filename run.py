@@ -7,18 +7,7 @@ import os
 import time
 import random
 from art import text2art
-
-
-class Colours:
-    """
-    Class of colours for different segments of text in game
-    """
-    red = '\033[91m'
-    blue = '\033[94m'
-    yellow = '\033[93m'
-    purple = '\033[95m'
-    white = '\033[0m'
-    green = "\033[0;32m"
+from colours import Colours
 
 
 # The length of each ship in the game
@@ -70,7 +59,7 @@ def game_load():
     print("\n")
     os.system("clear")
     art = text2art("Battle Ships")
-    type_fast(Colours.purple + art + Colours.white)
+    type_fast(Colours.PURPLE + art + Colours.WHITE)
     time.sleep(1)
     os.system("clear")
 
@@ -143,11 +132,11 @@ def exit_game():
     art_one = text2art("Goodbye")
     art_two = text2art("Hope to see")
     art_three = text2art("you again")
-    type_fast(Colours.purple + art_one)
+    type_fast(Colours.PURPLE + art_one)
     print("\n")
     type_fast(art_two)
     print("\n")
-    type_fast(art_three + Colours.white)
+    type_fast(art_three + Colours.WHITE)
     time.sleep(6)
     os.system("clear")
     main()
@@ -162,7 +151,7 @@ def battle_boards(board):
     print("__________________")
     row_num = 1
     for row in board:
-        print("%d|%s|" % (row_num, "|".join(row)))
+        print(f"{row_num}|{'|'.join(row)}")
         row_num += 1
 
 
@@ -322,12 +311,12 @@ def player_turn(board):
             player_turn(board)
         elif COMPUTER_BOARD[row][column] == "@":
             board[row][column] = "X"
-            type_fast(Colours.green + "You hit them!!" + Colours.white)
+            type_fast(Colours.GREEN + "You hit them!!" + Colours.WHITE)
             print("\n")
         else:
             board[row][column] = "O"
-            type_fast(Colours.red + "You missed them better luck next time!"
-                      + Colours.white)
+            type_fast(Colours.RED + "You missed them better luck next time!"
+                      + Colours.WHITE)
             print("\n")
     else:
         row, column = random.randint(0, 7), random.randint(0, 7)
@@ -337,11 +326,11 @@ def player_turn(board):
             player_turn(board)
         elif PLAYER_BOARD[row][column] == "@":
             board[row][column] = "X"
-            type_fast(Colours.red + "You have been hit!!!" + Colours.white)
+            type_fast(Colours.RED + "You have been hit!!!" + Colours.WHITE)
             print("\n")
         else:
             board[row][column] = "O"
-            type_fast(Colours.green + "The computer MISSED!!!" + Colours.white)
+            type_fast(Colours.GREEN + "The computer MISSED!!!" + Colours.WHITE)
             print("\n")
 
 
@@ -363,7 +352,7 @@ def start_the_game():
             break
         if score_count(PLAYER_GUESS_BOARD) == 16:
             art = text2art("YOU'VE WON!")
-            type_fast(Colours.purple + art + Colours.white)
+            type_fast(Colours.PURPLE + art + Colours.WHITE)
             play_game_again()
             break
         while True:
@@ -373,7 +362,7 @@ def start_the_game():
         battle_boards(COMPUTER_GUESS_BOARD)
         if score_count(COMPUTER_GUESS_BOARD) == 16:
             art = text2art("YOU LOST :(")
-            type_fast(Colours.red + art + Colours.white)
+            type_fast(Colours.RED + art + Colours.WHITE)
             play_game_again()
             break
 
@@ -402,7 +391,7 @@ def play_game_again():
             start_the_game()
         elif answer == "no":
             art = text2art("Goodbye")
-            type_fast(Colours.yellow + art + Colours.white)
+            type_fast(Colours.YELLOW + art + Colours.WHITE)
             time.sleep(2)
             os.system("clear")
             main()
