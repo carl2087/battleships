@@ -1,3 +1,8 @@
+"""
+Module to hold a classs of colours for use in the battleships game
+"""
+
+
 class Colours:
     """
     Class of colours for different segments of text in game
