@@ -109,6 +109,11 @@ I tested my code throughout this project by:
 * PEP8 within the gitpod terminal shows no errors remaining.
 * CI Python linter shows no errors as well.
 
+![Screenshor of no errors on main code](./assets/images/main-code-no-errors.png)
+![Screenshot of letters to numbers no errors](./assets/images/let-to-int-no-error.png)
+![Screenshot of colour module no errors](./assets/images/colour-no-error.png)
+![Screenshot of battle boards no errors](./assets/images/bat-board-no-error.png)
+
 ## Deployment
 
 * Steps for deployment
