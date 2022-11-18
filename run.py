@@ -287,12 +287,12 @@ def player_turn(board):
             print("\n")
             player_turn(board)
         elif COMPUTER_BOARD[row][column] == "@":
-            board[row][column] = "X"
-            type_fast(Colours.GREEN + "You hit them!!" + Colours.WHITE)
+            board[row][column] = Colours.RED + "X" + Colours.WHITE
+            type_fast(Colours.GREEN + "You HIT them!!" + Colours.WHITE)
             print("\n")
         else:
-            board[row][column] = "O"
-            type_fast(Colours.RED + "You missed them better luck next time!"
+            board[row][column] = Colours.BLUE + "O" + Colours.WHITE
+            type_fast(Colours.RED + "You MISSED them better luck next time!"
                       + Colours.WHITE)
             print("\n")
     else:
@@ -302,11 +302,11 @@ def player_turn(board):
         elif board[row][column] == "X":
             player_turn(board)
         elif PLAYER_BOARD[row][column] == "@":
-            board[row][column] = "X"
-            type_fast(Colours.RED + "You have been hit!!!" + Colours.WHITE)
+            board[row][column] = Colours.RED + "X" + Colours.WHITE
+            type_fast(Colours.RED + "You have been HIT!!!" + Colours.WHITE)
             print("\n")
         else:
-            board[row][column] = "O"
+            board[row][column] = Colours.BLUE + "O" + Colours.WHITE
             type_fast(Colours.GREEN + "The computer MISSED!!!" + Colours.WHITE)
             print("\n")
 
@@ -323,7 +323,9 @@ def start_the_game():
         while True:
             type_fast("Time to pick your shot!!")
             print("\n")
+            print("Computers board \n")
             battle_boards(PLAYER_GUESS_BOARD)
+            print("\n")
             player_turn(PLAYER_GUESS_BOARD)
             time.sleep(1.5)
             break
@@ -336,7 +338,9 @@ def start_the_game():
             player_turn(COMPUTER_GUESS_BOARD)
             time.sleep(1.5)
             break
+        print("Players board \n")
         battle_boards(COMPUTER_GUESS_BOARD)
+        print("\n")
         if score_count(COMPUTER_GUESS_BOARD) == 16:
             art = text2art("YOU LOST :(")
             type_fast(Colours.RED + art + Colours.WHITE)

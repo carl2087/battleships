@@ -13,5 +13,5 @@ def battle_boards(board):
     print("__________________")
     row_num = 1
     for row in board:
-        print(f"{row_num}|{'|'.join(row)}")
+        print(f"{row_num}|{'|'.join(row)}|")
         row_num += 1
