@@ -131,6 +131,8 @@ I tested my code throughout this project by:
   * The Code Institute slack channel
   * [Stack Overflow](https://stackoverflow.com/)
   * I also googled for solutions as well
+* I used [Text2art](https://github.com/sepandhaghighi/art) to write the large text
+  within my battleship game.
 
 ## Acknowledgements
 
