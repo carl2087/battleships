@@ -2,13 +2,14 @@
 Battleships game that runs in a custom terminal
 """
 
-# Libraries imported into the game
+# Libraries and functions imported into the game
 import os
 import time
 import random
 from art import text2art
 from colours import Colours
 from boards import battle_boards
+from let_to_num import letters_to_integers
 
 
 # The length of each ship in the game
@@ -20,18 +21,6 @@ PLAYER_BOARD = [[" "] * 8 for i in range(8)]
 COMPUTER_BOARD = [[" "] * 8 for i in range(8)]
 PLAYER_GUESS_BOARD = [[" "] * 8 for i in range(8)]
 COMPUTER_GUESS_BOARD = [[" "] * 8 for i in range(8)]
-
-# Changes letters into integers for the battleship board
-letters_to_integers = {
-    'A': 0,
-    'B': 1,
-    'C': 2,
-    'D': 3,
-    'E': 4,
-    'F': 5,
-    'G': 6,
-    'H': 7
-}
 
 
 def type_slow(word):
