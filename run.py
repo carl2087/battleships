@@ -8,6 +8,7 @@ import time
 import random
 from art import text2art
 from colours import Colours
+from boards import battle_boards
 
 
 # The length of each ship in the game
@@ -140,19 +141,6 @@ def exit_game():
     time.sleep(6)
     os.system("clear")
     main()
-
-
-def battle_boards(board):
-    """
-    Prints the battle board areas to the terminal.
-    Placeholder present to enable manipulation in game.
-    """
-    print("  A B C D E F G H")
-    print("__________________")
-    row_num = 1
-    for row in board:
-        print(f"{row_num}|{'|'.join(row)}")
-        row_num += 1
 
 
 def place_ship(board):
